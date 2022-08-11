@@ -1,0 +1,177 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.navbar {
+    width: 100%;
+    padding: .5rem 1rem;
+    text-align: center;
+    font-size: 25px;
+    background-color: #282828;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.container {
+    width: 100%;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 580px;
+}
+
+.box-content {
+    width: 100%;
+    padding: 1rem .5rem;
+    border-radius: 10px;
+    margin-bottom: 2.5rem;
+}
+
+.box-content .chars-content {
+    text-align: center;
+    /* position: relative; */
+    padding: 1rem
+}
+    
+.box-content h4 {
+    color: #0066ff;
+    margin-bottom: 15px;
+}
+
+.box-body {
+    width: 288px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-text-content {
+    margin-bottom: 2.5rem;
+}
+
+.input-text-content input {
+    width: 100%;
+    border: 0;
+    background-color: #F1F5F9;
+    border: 1px solid #CBD5E1;
+    color: #687079;
+    outline: 0;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.input-char-size {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.input-char-size input {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.input-char-color {
+    margin-bottom: 25px;
+}
+
+.input-char-color button {
+    width: 48px;
+    height: 48px;
+    outline: 0;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 4px;
+    margin-right: 4px;
+    transition: all .2s linear;
+}
+
+.input-char-color button.active {
+    border-color: #30ed69;
+}
+
+.modal {
+    width: 580px;
+    border-radius: 15px;
+    background-color: #fff;
+    border: 2px solid #000;
+    position: absolute;
+    top: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    overflow: hidden;
+    display: none;
+    transition: all .2s linear;
+}
+
+.modal .modal-body {
+    padding: 1rem;
+    position: relative;
+}
+
+.modal .modal-footer {
+    width: 100%;
+    padding: .5rem 1rem;
+    text-align: center;
+    background-color: #0066ff;
+    color: #fff;
+}
+
+
+.modal-close-btn:focus {
+	border: 0;
+	outline: none;
+}
+
+.modal-close-btn {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+	appearance: none;
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 1;
+	color: #000;
+	text-shadow: 0 1px 0 #fff;
+	opacity: .5;
+    cursor: pointer;
+}
+
+.modal-close-btn:hover {
+	opacity: .75;
+}
+
+.char-save {
+    text-align: center;
+}
+
+.btn-save {
+    display: inline-block;
+    border-radius: 5px;
+    border: none;
+    background-color: #545454;
+    color: #fff;
+    padding: .8rem 2rem;
+    cursor: pointer;
+    font-size: 16px;
+    outline: 0;
+    transition: all .2s linear;
+}
+
+.btn-save:hover,
+.btn-save:focus {
+    background-color: #1e1e1e;
+}

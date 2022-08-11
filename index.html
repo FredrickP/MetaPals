@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Simple Logo Generator</title>
+
+    <link rel="stylesheet" href="./app.css">
+
+</head>
+<body>
+    
+    <div class="navbar">
+        Super Simple Logo Maker 😍
+    </div>
+
+    <div class="container">
+
+        <div class="box-content" style="background-color: #ffe3cc;">
+            <h4 align="center">*The letters are draggable</h4>
+            <div id="text-generate">
+                <div class="chars-content"></div>
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="input-text-content">
+                <input type="text" class="char-input" placeholder="Type yout text logo here" value="Awesome">
+            </div>
+    
+            <div class="input-char-size">
+                <label for="">Size</label>
+                <input type="range" name="" min="8" max="72" value="26">
+                <span class="char-size-value">26px</span>
+            </div>
+    
+            <div class="input-char-color"></div>
+
+            <div class="char-save">
+                <button class="btn-save">
+                    Save
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <button class="modal-close-btn">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+            <canvas width="463" height="192" style="width: 100%; height: auto;"></canvas>
+            
+        </div>
+        <div class="modal-footer">
+            <span>Right click and choose save image</span>
+        </div>
+    </div>
+
+<script>
+
+    var charsContent = document.querySelector('.chars-content')
+    var charGenerate = document.querySelector('#text-generate')
+    var charGenerateContent = document.querySelector('#text-generate .chars-content')
+    var charGenerateContentText = document.querySelector('#text-generate span')
+    var inputCharText = document.querySelector('.input-text-content input')
+    var inputCharColorContent = document.querySelector('.input-char-color')
+    var inputCharColorContentItem = document.querySelectorAll('.input-char-color button')
+    var inputCharSizeInput = document.querySelector('.input-char-size input')
+    var btnSave = document.querySelector('.btn-save')
+    var modal = document.querySelector('.modal')
+    var charResult = document.querySelector('.modal canvas')
+
+    var charColor = [
+        '#F65A83',
+        '#21E1E1',
+        '#002B5B',
+        '#59CE8F',
+        '#31087B',
+    ];
+    var inputCharColorItem = ''
+    var i = 0;
+    charColor.forEach(color => {
+        inputCharColorItem += `<button class="${i == 0? 'active' : ''}" data-color="${color}" style="background-color: ${color}"></button>`
+        i++
+    });
+
+    inputCharColorContent.innerHTML = inputCharColorItem
+
+    charGenerate.style.color = charColor[0];
+    charGenerate.style.fontSize = inputCharSizeInput.value+'px';
+
+    generateChar(inputCharText.value)
+    
+
+    document.querySelectorAll('.input-char-color button').forEach(el => {
+        el.addEventListener('click', function(e){
+            let dataColor = this.getAttribute('data-color')
+            document.querySelectorAll('.input-char-color button').forEach(item => {
+                item.classList.remove('active')
+            })
+            this.classList.add('active')
+            charGenerate.style.color = dataColor
+        })
+    })
+
+    inputCharSizeInput.addEventListener('input',function(){
+        document.querySelector('.input-char-size .char-size-value').textContent = this.value+'px';
+        charGenerate.style.fontSize = this.value+'px';
+    })
+
+    function generateChar(){
+        let textVal = inputCharText.value
+        let charItem = textVal.split(''),
+            charText = ''
+        charItem.forEach(char => {
+            charText += `<span style="
+            font-weight: 600;
+            cursor: grab;
+            display: inline-block;
+            touch-action: none;
+            cursor: grab;
+            user-select: none;
+            opacity: 1;
+            transition: all .01s linear;">${char.replaceAll(' ','&nbsp;')}</span>`
+        })
+        charGenerateContent.innerHTML = ''
+        charGenerateContent.innerHTML = charText
+    }
+    
+    inputCharText.addEventListener('input', function(){
+        fadeOutEffect(charGenerate)
+    })
+
+    function fadeOutEffect(fadeTarget)
+    {
+        var fadeEffect = setInterval(function () {
+            if (!fadeTarget.style.opacity) {
+                fadeTarget.style.opacity = 1;
+            }
+            if (fadeTarget.style.opacity > 0) {
+                fadeTarget.style.opacity -= 0.1;
+            } else {
+                clearInterval(fadeEffect);
+                generateChar()
+                setSpanEvent()
+                setTimeout(function(){
+                    charGenerate.style.opacity = 1
+                },2000)
+            }
+        }, 200);
+    }
+
+    
+    function setSpanEvent(){ 
+        let inDrag = false;
+        document.querySelectorAll('#text-generate span').forEach(el => {
+            moveEvent(el)
+        })
+    }
+
+    setSpanEvent()
+
+    function moveEvent(el){
+        let _inDrag = false;
+        el.addEventListener("mousedown", function(e) {
+            _inDrag = true;
+            this.style.cursor = 'grabbing'
+        });
+        el.addEventListener("mousemove", function(e) {
+            if (!_inDrag) {return;}
+            this.style.transform = `translate3d(${e.offsetX}px, ${e.offsetY}px, 0px)`;
+        });
+        document.addEventListener("mouseup", function(e) {
+            _inDrag = false;
+            document.querySelectorAll('#text-generate span').forEach(el2 => {
+                el2.style.cursor = 'grab'
+            })
+        });
+    }
+
+    function convertLogo(){
+        var ctx = charResult.getContext('2d')
+        ctx.clearRect(0, 0, charResult.width, charResult.height);
+        ctx.beginPath();
+        ctx.rect(0, 0, charResult.width, charResult.height);
+        ctx.fillStyle = document.querySelector('.box-content').style.backgroundColor;
+        ctx.fill();
+
+        var fontArgs = ctx.font.split(' ');
+        var newSize = charGenerate.style.fontSize
+        var currentFontSize = newSize.replaceAll('px','')
+        currentFontSize = currentFontSize-(currentFontSize/3.5)
+        ctx.font = 'bold '+ newSize + ' ' + fontArgs[fontArgs.length - 1]
+        ctx.fillStyle = charGenerate.style.color
+        let leftStart = (((charResult.width/2)/2)-10)-currentFontSize,
+            topStart = 110;
+
+        document.querySelectorAll('#text-generate span').forEach((el,i) => {
+            i += 1
+            // console.log(el.style.transform)
+            let position = el.style.transform.split(/\w+\(|\);?/),
+                left = leftStart,
+                top = topStart
+            if (position[1]) {
+                let val = position[1].split(/,\s?/g)
+                if(val[0]){
+                    left = parseInt(val[0].replaceAll('px',''))
+                    left += (leftStart * 1)
+                }
+                if(val[1]){
+                    top = parseInt(val[1].replaceAll('px',''))
+                    top += (topStart * 1)
+                }
+                if(left > 570){
+                    left = (left )
+                }
+                console.log(top,left)
+            }
+
+            let text = el.innerHTML.replaceAll('&nbsp;',' ')
+            
+            ctx.fillText(text, left, top)
+            leftStart += (currentFontSize+i)
+        })
+
+        // charResult.toBlob(function (blob) {
+        //     window.saveAs(blob, 'my-node.png');
+        // });
+    }
+
+    btnSave.addEventListener('click',function(e){
+        e.preventDefault();
+        convertLogo()
+        modal.style.display = 'block'
+    })
+
+    document.querySelector('.modal .modal-close-btn').addEventListener('click',function(e){
+        e.preventDefault();
+        modal.style.display = 'none'
+    })
+
+</script>
+</body>
+</html>
