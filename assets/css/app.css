@@ -12,11 +12,15 @@ body {
     width: 100%;
     padding: .5rem 1rem;
     text-align: center;
-    font-size: 25px;
-    background-color: #282828;
+    font-size: 22px;
+    background-color: #202d33;
     color: #fff;
     font-weight: 600;
     margin-bottom: 20px;
+}
+
+.navbar img {
+    width: 25px;
 }
 
 .container {
@@ -43,7 +47,9 @@ body {
     
 .box-content h4 {
     color: #0066ff;
-    margin-bottom: 15px;
+    margin-bottom: 13px;
+    font-weight: lighter;
+    font-size: 11px;
 }
 
 .box-body {
@@ -162,7 +168,7 @@ body {
     display: inline-block;
     border-radius: 5px;
     border: none;
-    background-color: #545454;
+    background-color: #676b6b;
     color: #fff;
     padding: .8rem 2rem;
     cursor: pointer;

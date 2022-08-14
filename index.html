@@ -5,19 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Simple Logo Generator</title>
-
-    <link rel="stylesheet" href="./app.css">
-
+    <link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
     
     <div class="navbar">
-        Super Simple Logo Maker 😍
+        Super Simple Logo Maker <img src="assets/images/logo.png">
     </div>
 
     <div class="container">
-
-        <div class="box-content" style="background-color: #ffe3cc;">
+        <div class="box-content" style="background-color: #fce3fc;">
             <h4 align="center">*The letters are draggable</h4>
             <div id="text-generate">
                 <div class="chars-content"></div>
@@ -26,7 +23,7 @@
 
         <div class="box-body">
             <div class="input-text-content">
-                <input type="text" class="char-input" placeholder="Type yout text logo here" value="Awesome">
+                <input type="text" class="char-input" placeholder="Type yout text logo here" value="MetaPals Awesome">
             </div>
     
             <div class="input-char-size">
@@ -43,8 +40,6 @@
                 </button>
             </div>
         </div>
-
-
     </div>
 
     <div class="modal">
@@ -52,9 +47,7 @@
             <button class="modal-close-btn">
                 <span aria-hidden="true">&times;</span>
             </button>
-
-            <canvas width="463" height="192" style="width: 100%; height: auto;"></canvas>
-            
+                <canvas width="463" height="192" style="width: 100%; height: auto;"></canvas>
         </div>
         <div class="modal-footer">
             <span>Right click and choose save image</span>
@@ -76,11 +69,11 @@
     var charResult = document.querySelector('.modal canvas')
 
     var charColor = [
-        '#F65A83',
-        '#21E1E1',
-        '#002B5B',
-        '#59CE8F',
-        '#31087B',
+        '#eb1535',
+        '#18bfd9',
+        '#e8da3c',
+        '#e1ebea',
+        '#f5f7f7',
     ];
     var inputCharColorItem = ''
     var i = 0;
@@ -228,9 +221,6 @@
             leftStart += (currentFontSize+i)
         })
 
-        // charResult.toBlob(function (blob) {
-        //     window.saveAs(blob, 'my-node.png');
-        // });
     }
 
     btnSave.addEventListener('click',function(e){
